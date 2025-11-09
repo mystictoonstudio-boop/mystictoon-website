@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="google-site-verification" content="5--zddGu1lCu30L1KDkkVQ_3TQRx5_CHu8uMRO0GBpI" />
+  <title>MysticToon Studio — Where Emotions Meet AI Magic</title>
+  <meta name="description" content="MysticToon Studio — cinematic AI stories in Hindi & English. Emotional • Funny • Horror • Romantic."/>
+  <meta name="theme-color" content="#1a1a40">
+  <style>
+    /* ---------------------------
+       MysticToon Studio — Single file site
+       - Loading animation (5s or less; hides when page ready)
+       - Particle aura background (canvas)
+       - Animated logo reveal (SVG + CSS)
+       - Unique sections: Series hub, Character, Newsletter, Testimonials
+       ---------------------------*/
+    :root{
+      --bg1:#0b1020; --bg2:#171634; --bg3:#2a1040;
+      --gold:#ffd200; --white:#e9e9e9; --muted:#bfbfbf;
+      --accent:#b07bff;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; background:linear-gradient(180deg,var(--bg1),var(--bg2)); color:var(--white); min-height:100vh; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-x:hidden}
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#ffffff);display:flex;align-items:center;justify-content:center;color:var(--bg1);font-weight:900;font-size:20px;box-shadow:0 8px 36px rgba(0,0,0,.6)}
+    nav a{color:var(--muted);margin-left:14px;text-decoration:none;font-weight:600}
+    .cta-sub{background:var(--gold);color:var(--bg1);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:700}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;margin-top:28px;position:relative;z-index:2}
+    .hero h1{font-size:42px;margin:0 0 14px 0;line-height:1.02;letter-spacing:-0.5px}
+    .subtag{color:var(--muted);margin:0 0 18px 0}
+    .buttons{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:8px; text-decoration:none; color:var(--white); background:transparent;border:1px solid rgba(255,255,255,.06)}
+    .btn-primary{background:var(--gold);color:var(--bg1);font-weight:700;border:0}
+
+    /* Animated logo reveal */
+    .logo-anim { width:160px; height:160px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+    .logo-anim svg { width:120px; height:120px; filter:drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
+
+    /* Cards & grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.6);transition:transform .18s;padding:0}
+    .card:hover{transform:translateY(-6px)}
+    .thumb{width:100%;height:180px;object-fit:cover;display:block;background:linear-gradient(135deg,#1a1a40,#2a1040);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;font-size:18px}
+    .meta{padding:12px}
+    .meta h4{margin:0;font-size:15px}
+    .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;color:var(--gold);font-size:12px}
+    .watch{float:right;color:var(--muted);font-size:12px}
+
+    /* Series hub, featured character */
+    .series {margin-top:32px; display:grid; grid-template-columns:2fr 1fr; gap:18px; align-items:start}
+    .series-list .ep{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);margin-bottom:10px}
+    .character {padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:center}
+    .character img{width:100%;border-radius:10px;max-height:200px;object-fit:cover}
+    .character h4{margin:12px 0 6px 0}
+
+    /* Newsletter */
+    .newsletter{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(176,123,255,0.02));display:flex;gap:12px;align-items:center}
+    .newsletter input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white)}
+    .newsletter .send{background:var(--gold);border:0;color:var(--bg1);padding:10px 14px;border-radius:8px;font-weight:700}
+
+    /* testimonials */
+    .testimonials{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .testimonial{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);font-size:14px;color:var(--muted)}
+
+    /* contact */
+    form input, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:var(--white);margin-top:8px}
+    .send{background:var(--gold);color:var(--bg1);padding:10px 12px;border-radius:8px;border:0;font-weight:700}
+
+    footer{margin-top:48px;padding:24px 0;border-top:1px solid rgba(255,255,255,0.04);color:var(--muted);text-align:center}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* responsive */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .series{grid-template-columns:1fr}
+      .testimonials{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .grid{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+      .logo-anim{margin-bottom:8px}
+    }
+
+    /* ---------------------------
+       Loading overlay styles
+       ---------------------------*/
+    #loadingOverlay{
+      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#05060b, #121226);z-index:9999;flex-direction:column;gap:14px;
+    }
+    .loader-box{width:220px;height:220px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 12px 60px rgba(0,0,0,0.7)}
+    .loader-text{color:var(--muted);font-size:14px}
+    .progress{width:160px;height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:12px}
+    .bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:999px;transition:width 0.3s ease}
+    /* shimmer sparkle */
+    .sparkle {position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle,#fff,rgba(255,255,255,0.05));filter:blur(6px);opacity:0.9;mix-blend-mode:screen;animation:float 3s linear infinite}
+    @keyframes float {0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(45deg)}100%{transform:translateY(0) rotate(0)}}
+
+  </style>
+</head>
+<body>
+  <!-- Particle aura canvas (subtle) -->
+  <canvas id="particleCanvas" style="position:fixed;left:0;top:0;z-index:0;pointer-events:none"></canvas>
+
+  <!-- Loading overlay -->
+  <div id="loadingOverlay" aria-hidden="false">
+    <div class="loader-box" role="status" aria-live="polite">
+      <!-- Animated SVG logo reveal -->
+      <div class="logo-anim" aria-hidden="true">
+        <!-- Simple animated circular logo with stroke reveal -->
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#ffd200"/>
+              <stop offset="1" stop-color="#b07bff"/>
+            </linearGradient>
+          </defs>
+          <circle cx="60" cy="60" r="38" stroke="url(#g)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="240" stroke-dashoffset="240">
+            <animate attributeName="stroke-dashoffset" from="240" to="0" dur="1.2s" fill="freeze" />
+          </circle>
+          <text x="50%" y="54%" text-anchor="middle" fill="#0b1020" font-size="26" font-weight="800" font-family="Inter, Arial" dy=".35em">M</text>
+        </svg>
+      </div>
+
+      <div style="text-align:center">
+        <div style="font-weight:700;font-size:16px">MysticToon Studio</div>
+        <div class="loader-text">Where Emotions Meet AI Magic</div>
+        <div class="progress" aria-hidden="true"><div class="bar" id="loadingBar"></div></div>
+      </div>
+    </div>
+    <div style="margin-top:8px;color:var(--muted);font-size:13px">Loading — cinematic world बन रहा है…</div>
+  </div>
+
+  <!-- main content -->
+  <div class="container" id="mainContent" style="opacity:0;transform:translateY(8px);transition:all .6s ease;z-index:2;position:relative">
+    <header>
+      <div class="brand">
+        <div class="logo-circle" aria-hidden="true">M</div>
+        <div>
+          <div style="font-weight:800;font-size:18px">MysticToon Studio</div>
+          <div style="font-size:12px;color:var(--gold)">Where Emotions Meet AI Magic ✨</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#videos">Videos</a>
+        <a href="#series">Series</a>
+        <a class="cta-sub" href="https://www.youtube.com/@MysticToonStudio" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="heroTitle" style="margin-top:18px">
+      <div>
+        <!-- small animated logo -->
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="logo-anim" aria-hidden="true">
+            <!-- tiny SVG simpler -->
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="g2" x1="0" x2="1">
+                  <stop offset="0" stop-color="#ffd200"/>
+                  <stop offset="1" stop-color="#b07bff"/>
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="34" stroke="url(#g2)" stroke-width="4" fill="none" stroke-dasharray="200" stroke-dashoffset="0" style="opacity:.95"></circle>
+              <text x="50%" y="54%" text-anchor="middle" fill="#0b1020" font-size="24" font-weight="800" font-family="Inter, Arial" dy=".35em">M</text>
+            </svg>
+          </div>
+          <div>
+            <h1 id="heroTitle">MysticToon Studio</h1>
+            <div class="subtag">जहाँ हँसी भी है, डर भी और दिल की बातें भी — cinematic AI toons in Hindi & English.</div>
+          </div>
+        </div>
+
+        <div class="buttons" style="margin-top:18px">
+          <a class="btn-primary" href="https://www.youtube.com/@MysticToonStudio" target="_blank" rel="noopener">Subscribe on YouTube</a>
+          <a class="btn" href="#videos">Watch Latest</a>
+          <a class="btn" href="#contact">Work with us</a>
+        </div>
+
+        <ul style="margin-top:18px;color:var(--gold);display:grid;grid-template-columns:repeat(2,auto);gap:8px;list-style:none;padding:0">
+          <li>🔥 Daily Shorts</li>
+          <li>🎬 Weekly Long Stories</li>
+          <li>🎭 Emotional • Funny • Horror • Romantic</li>
+          <li>✨ Signature intro & sound</li>
+        </ul>
+      </div>
+
+      <div>
+        <!-- Hero artwork / trailer placeholder -->
+        <div style="width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.6);background:linear-gradient(135deg,#1a1a40,#2a1040);display:flex;align-items:center;justify-content:center">
+          <div style="text-align:center;color:var(--muted)">
+            <div style="font-size:18px;font-weight:700">Featured Trailer</div>
+            <div style="margin-top:8px;color:var(--muted)">Trailer / Featured video को बाद में add करें — iframe embed के लिए HTML में बदल दें</div>
+            <div style="margin-top:12px">
+              <a class="btn" href="#videos">Coming Soon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos (placeholders) -->
+    <section id="videos">
+      <h3 style="margin-top:36px">Latest Stories</h3>
+      <p class="small" style="margin-top:6px">Shorts and full stories will appear here. Publish videos on your YouTube channel and paste the IDs in the HTML to display them.</p>
+
+      <div class="grid" id="videoGrid">
+        <!-- empty placeholders so layout stays neat -->
+        <div class="card">
+          <div class="thumb">Coming Soon</div>
+          <div class="meta">
+            <h4>Video Title Coming Soon</h4>
+            <div class="tags">
+              <div class="tag">—</div>
+              <div class="watch">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="thumb">Coming Soon</div>
+          <div class="meta">
+            <h4>Video Title Coming Soon</h4>
+            <div class="tags">
+              <div class="tag">—</div>
+              <div class="watch">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="thumb">Coming Soon</div>
+          <div class="meta">
+            <h4>Video Title Coming Soon</h4>
+            <div class="tags">
+              <div class="tag">—</div>
+              <div class="watch">—</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Series hub + Featured character -->
+    <section id="series" class="series" aria-labelledby="seriesTitle">
+      <div>
+        <h3 id="seriesTitle">Series Hub — Mystic Stories</h3>
+        <p class="small">यहाँ तुम्हारे recurring series और episodes दिखेंगे (example: 'Robot Love', 'AI Ghost Tales', 'Minecraft Toon Specials').</p>
+
+        <div class="series-list" style="margin-top:12px">
+          <div class="ep">
+            <strong>Series: Robot Love</strong>
+            <div class="muted small">Episodes: 0 (Add episodes using the Videos area)</div>
+            <div class="small" style="margin-top:8px">Description: Emotional AI love stories with a cinematic twist.</div>
+          </div>
+
+          <div class="ep">
+            <strong>Series: Mystic Laughs</strong>
+            <div class="muted small">Episodes: 0</div>
+            <div class="small" style="margin-top:8px">Description: Short funny toons built for high retention.</div>
+          </div>
+
+          <div class="ep">
+            <strong>Series: Haunted Circuit</strong>
+            <div class="muted small">Episodes: 0</div>
+            <div class="small" style="margin-top:8px">Description: Horror shorts with twist endings.</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="character" aria-labelledby="charTitle">
+        <h4 id="charTitle">Featured Character</h4>
+        <!-- placeholder image (replace with assets/character.jpg) -->
+        <img src="https://via.placeholder.com/400x240.png?text=Character+Art" alt="Featured Character">
+        <div style="margin-top:10px">
+          <strong>Nome: Chotu the Bot</strong>
+          <div class="small muted" style="margin-top:6px">A curious little bot who learns human feelings.</div>
+        </div>
+        <div style="margin-top:12px">
+          <a class="btn" href="#videos">See Stories</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Newsletter -->
+    <section style="margin-top:24px">
+      <div class="newsletter">
+        <div style="flex:1">
+          <strong>Join Mystic Letters — Early Access</strong>
+          <div class="small muted" style="margin-top:6px">Get episode drops, behind-the-scenes and exclusive short stories.</div>
+        </div>
+        <!-- Example: Formspree setup — replace ACTION URL with your Formspree endpoint if you want real emails -->
+        <form id="newsletterForm" onsubmit="event.preventDefault(); alert('Demo signup received — connect to Formspree or MailerLite for real signups.');" style="display:flex;gap:8px;align-items:center;width:480px;max-width:100%">
+          <input type="email" placeholder="Your email" required>
+          <button class="send" type="submit">Join</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" aria-label="Fan reviews">
+      <div class="testimonial">“I cried in 30 seconds — these AI stories hit different!” — <strong>Fan</strong></div>
+      <div class="testimonial">“So creative and different. Love the cinematic vibe.” — <strong>Viewer</strong></div>
+    </section>
+
+    <!-- About & Plan -->
+    <section id="about" style="margin-top:28px">
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:18px">
+        <div>
+          <h3>About MysticToon Studio</h3>
+          <p class="small" style="margin-top:8px">MysticToon Studio creates short cinematic AI-animated stories in Hindi and English — emotional, funny, romantic, horror and moral tales. Our mission is to make viewers feel every scene. We release daily shorts and weekly longer episodes. The brand identity uses deep cinematic colors, a signature sound tag and consistent thumbnails to build recognition.</p>
+
+          <ul style="margin-top:12px">
+            <li class="small">• Daily AI Shorts (30–60s)</li>
+            <li class="small">• Weekly Long Stories (2–6 min)</li>
+            <li class="small">• Festival Specials (Diwali, Halloween, Valentine)</li>
+            <li class="small">• Merch & Sponsorships (coming soon)</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="card" style="padding:14px">
+            <h4 style="margin:0">30-Day Launch Plan</h4>
+            <ol class="small muted" style="margin-top:8px;line-height:1.6">
+              <li>Publish 3 Shorts in first 3 days.</li>
+              <li>Upload 1 long episode on day 4.</li>
+              <li>Use branded intro/outro and sound tag.</li>
+              <li>Share teaser on Instagram and community tab.</li>
+              <li>Check analytics and iterate weekly.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="margin-top:28px">
+      <h3>Contact & Collaborations</h3>
+      <p class="small" style="margin-top:6px">For collaborations, sponsorships or custom stories, contact us below.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:12px">
+        <form style="background:rgba(255,255,255,0.02);padding:16px;border-radius:12px" onsubmit="event.preventDefault(); alert('Message sent (demo) — replace with real backend).')">
+          <label class="small">Name</label>
+          <input placeholder="Your name" required>
+
+          <label class="small" style="margin-top:10px">Email</label>
+          <input placeholder="you@example.com" required>
+
+          <label class="small" style="margin-top:10px">Message</label>
+          <textarea rows="5" placeholder="Tell us about your project" required></textarea>
+
+          <div style="margin-top:12px">
+            <button class="send" type="submit">Send Message</button>
+          </div>
+        </form>
+
+        <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.02)">
+          <h4 style="margin:0">Business Email</h4>
+          <div style="margin-top:8px;color:var(--muted)"><a href="mailto:mystictoonstudio@gmail.com" style="color:var(--gold);text-decoration:none">mystictoonstudio@gmail.com</a></div>
+
+          <h4 style="margin-top:14px">Socials</h4>
+          <div style="margin-top:8px">
+            <a href="https://www.youtube.com/@MysticToonStudio" style="color:var(--gold);text-decoration:none" target="_blank" rel="noopener">YouTube</a> •
+            <a href="#" style="color:var(--gold);text-decoration:none">Instagram</a> •
+            <a href="#" style="color:var(--gold);text-decoration:none">Facebook</a>
+          </div>
+
+          <h4 style="margin-top:14px">Studio Stats</h4>
+          <div style="display:flex;gap:16px;margin-top:8px">
+            <div style="text-align:center">
+              <div style="font-weight:800;font-size:20px" id="statSubs">0</div>
+              <div class="small muted">Subscribers</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-weight:800;font-size:20px" id="statVideos">0</div>
+              <div class="small muted">Videos</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-weight:800;font-size:20px" id="statViews">0</div>
+              <div class="small muted">Monthly Views</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer style="margin-top:36px">
+      <div style="max-width:1100px;margin:0 auto;padding:20px 0;color:var(--muted);text-align:center">
+        <div style="font-weight:700">MysticToon Studio</div>
+        <div style="margin-top:6px">© <span id="year"></span> MysticToon Studio — All rights reserved</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    /* ---------------------------
+       Particle background (simple)
+       ---------------------------*/
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+    const particles = [];
+    const PARTICLE_COUNT = Math.round((W*H)/90000); // scale with screen
+    for(let i=0;i<PARTICLE_COUNT;i++){
+      particles.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.2,
+        vy: (Math.random()-0.5)*0.2,
+        r: 0.6 + Math.random()*1.6,
+        a: 0.08 + Math.random()*0.2
+      });
+    }
+    function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(const p of particles){
+        p.x += p.vx; p.y += p.vy;
+        if(p.x < -20) p.x = W+20;
+        if(p.x > W+20) p.x = -20;
+        if(p.y < -20) p.y = H+20;
+        if(p.y > H+20) p.y = -20;
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(176,123,255,'+p.a+')';
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+
+    /* ---------------------------
+       Loading overlay logic
+       ---------------------------*/
+    const overlay = document.getElementById('loadingOverlay');
+    const bar = document.getElementById('loadingBar');
+    // simulate progress (quick)
+    let progress=0;
+    const interval = setInterval(()=> {
+      progress += 8 + Math.random()*12;
+      if(progress>100) progress=100;
+      bar.style.width = progress + '%';
+      if(progress >= 100){
+        clearInterval(interval);
+        // small delay so SVG reveal visible
+        setTimeout(()=> {
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+          overlay.setAttribute('aria-hidden','true');
+          document.getElementById('mainContent').style.opacity = '1';
+          document.getElementById('mainContent').style.transform = 'translateY(0)';
+          // remove element from flow after transition
+          setTimeout(()=> overlay.remove(), 600);
+        }, 500);
+      }
+    }, 250);
+
+    /* ---------------------------
+       Optional: Auto-fill studio stats (demo zeros)
+       Replace these with API or manual numbers if you want
+       ---------------------------*/
+    document.getElementById('statSubs').textContent = '0';
+    document.getElementById('statVideos').textContent = '0';
+    document.getElementById('statViews').textContent = '0';
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+  </script>
+</body>
+</html>

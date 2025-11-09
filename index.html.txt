@@ -2,8 +2,8 @@
 <html lang="hi">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="google-site-verification" content="5--zddGu1lCu30L1KDkkVQ_3TQRx5_CHu8uMRO0GBpI" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MysticToon Studio — Where Emotions Meet AI Magic</title>
   <meta name="description" content="MysticToon Studio — cinematic AI stories in Hindi & English. Emotional • Funny • Horror • Romantic."/>
   <meta name="theme-color" content="#1a1a40">
